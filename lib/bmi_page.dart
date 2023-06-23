@@ -1,11 +1,10 @@
 import 'package:bmi_calculator/card_container.dart';
+import 'package:bmi_calculator/screen_arguments.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class BmiResultPage extends StatelessWidget {
-  BmiResultPage({Key? key, required this.bmi}) : super(key: key);
-
-  final double bmi;
+  BmiResultPage({Key? key}) : super(key: key);
   String getStatus(double bmi){
 
     if(bmi < 18.5){
@@ -24,6 +23,7 @@ class BmiResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
       appBar: AppBar(
         title: Text("Resultado BMI"),
@@ -40,7 +40,7 @@ class BmiResultPage extends StatelessWidget {
                       //crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("BMI",style: kTextStyle,),
-                        Text(bmi.toStringAsFixed(2),style: kNumberStyle,)
+                        Text(args.bmi.toStringAsFixed(2),style: kNumberStyle,)
                       ],
                     ),
                     onPress: (){}),
@@ -56,7 +56,7 @@ class BmiResultPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       //crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(getStatus(bmi),style: kNumberStyle,),
+                        Text(getStatus(args.bmi),style: kNumberStyle,),
                       ],
                     ),
                     onPress: (){}),

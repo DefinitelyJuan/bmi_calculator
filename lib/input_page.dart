@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/screen_arguments.dart';
 import 'package:flutter/material.dart';
 import 'card_container.dart';
 import 'icon_content.dart';
@@ -134,6 +135,7 @@ class _InputPageState extends State<InputPage> {
                               onPressed: (){
                                 setState(() {
                                   weight--;
+                                  weight < 1 ? weight = 1: weight;
                                 });
                               }
                           ),
@@ -174,6 +176,7 @@ class _InputPageState extends State<InputPage> {
                             onPressed: (){
                               setState(() {
                                 age--;
+                                age < 1 ? age = 1: age;
                               });
                             }
                         ),
@@ -208,11 +211,10 @@ class _InputPageState extends State<InputPage> {
               double heightInMeters = height / 100;
               double bmi = weight / (heightInMeters * heightInMeters);
 
-              Navigator.push(
+              Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(builder: (context){
-                    return BmiResultPage(bmi: bmi);
-                  })
+                  "/results",
+                  arguments: ScreenArguments(bmi)
               );
             },
           )
